@@ -10,13 +10,14 @@ import io.github.toru0239.skeletoncore.product.Product
 import sg.toru.skeleton.product.R
 import sg.toru.skeleton.product.databinding.ItemProductBinding
 
-class ProductAdapter(): ListAdapter<Product, ProductViewHolder>(ProductDiffCallback()) {
+class ProductAdapter(private val clickCallback:((Product)->Unit)? = null): ListAdapter<Product, ProductViewHolder>(ProductDiffCallback()) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): ProductViewHolder {
         return ProductViewHolder(
-            ItemProductBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            viewBinding = ItemProductBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+            clickCallback = clickCallback
         )
     }
 
@@ -39,7 +40,10 @@ class ProductDiffCallback :DiffUtil.ItemCallback<Product>() {
     ) = (oldItem.id == newItem.id)
 }
 
-class ProductViewHolder(private val viewBinding: ItemProductBinding): RecyclerView.ViewHolder(viewBinding.root) {
+class ProductViewHolder(
+    private val viewBinding: ItemProductBinding,
+    private val clickCallback: ((Product) -> Unit)? = null
+): RecyclerView.ViewHolder(viewBinding.root) {
     fun bind(product: Product) {
         viewBinding.txtProductTitle.text = product.title
         viewBinding.txtProductPrice.text = "${product.price} dollar"
@@ -47,6 +51,9 @@ class ProductViewHolder(private val viewBinding: ItemProductBinding): RecyclerVi
         viewBinding.imgProductThumbnail.load(product.thumbnail) {
             crossfade(true)
             placeholder(R.drawable.placeholder)
+        }
+        viewBinding.root.setOnClickListener {
+            clickCallback?.invoke(product)
         }
     }
 }

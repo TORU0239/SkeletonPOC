@@ -5,19 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import io.github.toru0239.skeletoncore.repository.impl.ProductRepositoryImpl
 import io.github.toru0239.skeletoncore.usecase.ProductUseCase
 import io.github.toru0239.skeletoncore.usecase.impl.ProductUseCaseImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import sg.toru.skeleton.product.R
 import sg.toru.skeleton.product.databinding.FragmentProductBinding
 
 class ProductFragment : Fragment() {
@@ -41,7 +38,9 @@ class ProductFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.rcvProducts.run {
-            adapter = ProductAdapter()
+            adapter = ProductAdapter{
+                Toast.makeText(requireContext(), "Product id: ${it.id}", Toast.LENGTH_SHORT).show()
+            }
             layoutManager = LinearLayoutManager(requireContext())
             addItemDecoration(
                 DividerItemDecoration(requireContext(), LinearLayout.VERTICAL)
