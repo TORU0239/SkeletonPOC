@@ -36,7 +36,6 @@
         android:id="@+id/imgProductThumbnail"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:background="@android:color/holo_blue_light"
         app:layout_constraintStart_toStartOf="@id/guideline16dpBegin"
         app:layout_constraintTop_toTopOf="@id/guideline16dpTop"
         app:layout_constraintBottom_toBottomOf="@id/guideline16dpBottom"/>

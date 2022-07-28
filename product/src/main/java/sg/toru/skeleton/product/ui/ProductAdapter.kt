@@ -5,7 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import io.github.toru0239.skeletoncore.product.Product
+import sg.toru.skeleton.product.R
 import sg.toru.skeleton.product.databinding.ItemProductBinding
 
 class ProductAdapter(): ListAdapter<Product, ProductViewHolder>(ProductDiffCallback()) {
@@ -42,5 +44,9 @@ class ProductViewHolder(private val viewBinding: ItemProductBinding): RecyclerVi
         viewBinding.txtProductTitle.text = product.title
         viewBinding.txtProductPrice.text = "${product.price} dollar"
         viewBinding.txtProductRating.text = "Rate: ${product.rating}"
+        viewBinding.imgProductThumbnail.load(product.thumbnail) {
+            crossfade(true)
+            placeholder(R.drawable.placeholder)
+        }
     }
 }
