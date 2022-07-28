@@ -45,15 +45,17 @@ class ProductViewHolder(
     private val clickCallback: ((Product) -> Unit)? = null
 ): RecyclerView.ViewHolder(viewBinding.root) {
     fun bind(product: Product) {
-        viewBinding.txtProductTitle.text = product.title
-        viewBinding.txtProductPrice.text = "${product.price} dollar"
-        viewBinding.txtProductRating.text = "Rate: ${product.rating}"
-        viewBinding.imgProductThumbnail.load(product.thumbnail) {
-            crossfade(true)
-            placeholder(R.drawable.placeholder)
-        }
-        viewBinding.root.setOnClickListener {
-            clickCallback?.invoke(product)
+        viewBinding.run {
+            txtProductTitle.text = product.title
+            txtProductPrice.text = String.format(root.context.getString(R.string.product_price), product.price)
+            txtProductRating.text = String.format(root.context.getString(R.string.product_rating), product.rating)
+            imgProductThumbnail.load(product.thumbnail) {
+                crossfade(true)
+                placeholder(R.drawable.placeholder)
+            }
+            root.setOnClickListener {
+                clickCallback?.invoke(product)
+            }
         }
     }
 }
