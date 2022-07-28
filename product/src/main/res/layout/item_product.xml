@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline16dpTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="16dp"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline16dpBegin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="16dp"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline16dpEnd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="16dp"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline16dpBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="16dp"/>
+
+    <ImageView
+        android:id="@+id/imgProductThumbnail"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@android:color/holo_blue_light"
+        app:layout_constraintStart_toStartOf="@id/guideline16dpBegin"
+        app:layout_constraintTop_toTopOf="@id/guideline16dpTop"
+        app:layout_constraintBottom_toBottomOf="@id/guideline16dpBottom"/>
+
+    <TextView
+        android:id="@+id/txtProductTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="16dp"
+        android:textSize="18sp"
+        app:layout_constraintTop_toTopOf="@id/imgProductThumbnail"
+        app:layout_constraintStart_toEndOf="@id/imgProductThumbnail"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="iPhone 15"/>
+
+    <TextView
+        android:id="@+id/txtProductPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:includeFontPadding="false"
+        app:layout_constraintStart_toEndOf="@id/imgProductThumbnail"
+        app:layout_constraintBottom_toBottomOf="@id/imgProductThumbnail"
+        tools:text="34000"/>
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="end"
+        app:constraint_referenced_ids="txtProductPrice, txtProductRating"/>
+
+    <TextView
+        android:id="@+id/txtProductRating"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="2dp"
+        android:includeFontPadding="false"
+        app:layout_constraintStart_toEndOf="@id/txtProductPrice"
+        app:layout_constraintEnd_toEndOf="@id/guideline16dpEnd"
+        app:layout_constraintBottom_toBottomOf="@id/imgProductThumbnail"
+        tools:text="Rate: 3.4"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

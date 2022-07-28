@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+<!--    <androidx.constraintlayout.widget.Guideline-->
+<!--        android:id="@+id/guideline16dpTop"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal"-->
+<!--        app:layout_constraintGuide_begin="16dp"/>-->
+
+<!--    <androidx.constraintlayout.widget.Guideline-->
+<!--        android:id="@+id/guideline16dpBegin"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="vertical"-->
+<!--        app:layout_constraintGuide_begin="16dp"/>-->
+
+<!--    <androidx.constraintlayout.widget.Guideline-->
+<!--        android:id="@+id/guideline16dpEnd"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="vertical"-->
+<!--        app:layout_constraintGuide_end="16dp"/>-->
+
+<!--    <androidx.constraintlayout.widget.Guideline-->
+<!--        android:id="@+id/guideline16dpBottom"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal"-->
+<!--        app:layout_constraintGuide_end="16dp"/>-->
+
+    <ImageView
+        android:id="@+id/imgProductThumbnail"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@android:color/holo_blue_light"
+        app:layout_constraintStart_toStartOf="@id/guideline16dpBegin"
+        app:layout_constraintTop_toTopOf="@id/guideline16dpTop"
+        app:layout_constraintBottom_toBottomOf="@id/guideline16dpBottom"/>
+    <TextView
+        android:id="@+id/txtProductTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="16dp"
+        android:textSize="16sp"
+        android:background="@android:color/background_dark"
+        android:text="TEST TEST TEST TEST TEST TEST "/>
+
+<!--</androidx.constraintlayout.widget.ConstraintLayout>-->
+</LinearLayout>
