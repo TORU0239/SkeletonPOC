@@ -1,10 +1,13 @@
 package sg.toru.skeleton.product.ui
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import coil.load
 import io.github.toru0239.skeletoncore.product.Product
 import io.github.toru0239.skeletoncore.repository.impl.ProductRepositoryImpl
@@ -30,6 +33,18 @@ class ProductDetailFragment : Fragment() {
         )
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        requireActivity().onBackPressedDispatcher.addCallback(
+            this,
+            object:OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    parentFragmentManager.popBackStack()
+                }
+            }
+        )
+    }
+    
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
