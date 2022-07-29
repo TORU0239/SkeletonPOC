@@ -44,7 +44,7 @@ class ProductDetailFragment : Fragment() {
             }
         )
     }
-    
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -75,7 +75,6 @@ class ProductDetailFragment : Fragment() {
     private fun doDrawView(product: Product) {
         binding.imgMainProduct.load(product.thumbnail) {
             crossfade(true)
-            placeholder(R.drawable.placeholder)
         }
     }
 
