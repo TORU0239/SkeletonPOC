@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentContainerView
 import androidx.fragment.app.FragmentManager
+import sg.toru.skeleton.product.ui.ProductBaseFragment
 import sg.toru.skeleton.product.ui.ProductFragment
 
 class MainActivity : AppCompatActivity() {
@@ -14,7 +15,7 @@ class MainActivity : AppCompatActivity() {
 
         supportFragmentManager.beginTransaction().add(
             R.id.mainFragmentContainer,
-            ProductFragment.newInstance(),
+            ProductBaseFragment.newInstance(),
         ).commit()
     }
 }
