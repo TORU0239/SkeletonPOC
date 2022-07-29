@@ -41,14 +41,14 @@ class ProductFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.rcvProducts.run {
             adapter = ProductAdapter{
-                requireActivity().supportFragmentManager.beginTransaction()
+                parentFragmentManager.beginTransaction()
                     .setCustomAnimations(
                         R.anim.slide_in_right,
                         R.anim.slide_out_left,
                         android.R.anim.slide_in_left,
                         android.R.anim.slide_out_right,
                     )
-                    .replace(R.id.productContainerFragment, ProductDetailFragment.newInstance())
+                    .replace(R.id.productContainerFragment, ProductDetailFragment.newInstance(it.id))
                     .addToBackStack(ProductFragment::class.simpleName)
                     .commit()
             }
@@ -70,6 +70,7 @@ class ProductFragment : Fragment() {
         CoroutineScope(Dispatchers.IO).launch {
             val products = useCase.getProductList()
             CoroutineScope(Dispatchers.Main).launch {
+                binding.progressBar.visibility = View.GONE
                 (binding.rcvProducts.adapter as ProductAdapter).submitList(products.products)
             }
         }
