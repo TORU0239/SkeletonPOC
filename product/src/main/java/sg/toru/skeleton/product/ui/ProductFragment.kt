@@ -15,10 +15,12 @@ import io.github.toru0239.skeletoncore.usecase.impl.ProductUseCaseImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import sg.toru.skeleton.product.R
 import sg.toru.skeleton.product.databinding.FragmentProductBinding
 
 class ProductFragment : Fragment() {
-    private lateinit var binding: FragmentProductBinding
+    private var _binding: FragmentProductBinding? = null
+    private val binding get() = _binding!!
 
     private val useCase: ProductUseCase by lazy {
         ProductUseCaseImpl(
@@ -31,7 +33,7 @@ class ProductFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        binding = FragmentProductBinding.inflate(inflater, container, false)
+        _binding = FragmentProductBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -39,7 +41,16 @@ class ProductFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.rcvProducts.run {
             adapter = ProductAdapter{
-                Toast.makeText(requireContext(), "Product id: ${it.id}", Toast.LENGTH_SHORT).show()
+                parentFragmentManager.beginTransaction()
+                    .setCustomAnimations(
+                        R.anim.slide_in_right,
+                        R.anim.slide_out_left,
+                        R.anim.slide_in_left,
+                        R.anim.slide_out_right,
+                    )
+                    .replace(R.id.productContainerFragment, ProductDetailFragment.newInstance(it.id))
+                    .addToBackStack(ProductFragment::class.simpleName)
+                    .commit()
             }
             layoutManager = LinearLayoutManager(requireContext())
             addItemDecoration(
@@ -50,10 +61,16 @@ class ProductFragment : Fragment() {
         callApi()
     }
 
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
+    }
+
     private fun callApi() {
         CoroutineScope(Dispatchers.IO).launch {
             val products = useCase.getProductList()
             CoroutineScope(Dispatchers.Main).launch {
+                binding.progressBar.visibility = View.GONE
                 (binding.rcvProducts.adapter as ProductAdapter).submitList(products.products)
             }
         }
